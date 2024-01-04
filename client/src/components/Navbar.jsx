@@ -3,6 +3,8 @@ import styled from "styled-components"
 import SearchIcon from '@mui/icons-material/Search';
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail'
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import ShoppingCartOutlined from '@mui/icons-material/ShoppingCartOutlined';
 
 const Container = styled.div`
     height: 60px;
@@ -24,6 +26,9 @@ const Center = styled.div`
 `
 const Right = styled.div`
     flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 `
 const Language = styled.span`
     font-size: 14px;
@@ -47,6 +52,7 @@ const Logo = styled.h1`
 const MenuItem = styled.div`
     font-size: 14px;
     cursor: pointer;
+    margin-left: 25px;
 `
 
 const Navbar = () => {
@@ -61,7 +67,7 @@ const Navbar = () => {
                         <Input>
 
                         </Input>
-                        <SearchIcon />
+                        <SearchIcon style={{color:"gray", fontSize:"16px"}} />
                     </SearchContainer>
                 </Left>
                 <Center>
@@ -78,7 +84,8 @@ const Navbar = () => {
                     </MenuItem>
                     <MenuItem>
                         <Badge badgeContent={4} color="primary">
-                            <MailIcon color="action" />
+                            <ShoppingCartOutlined />
+                            
                         </Badge>
                     </MenuItem>
                 </Right>
