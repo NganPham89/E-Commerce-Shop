@@ -39,3 +39,38 @@ export const categories = [
         title: "YELLOW ROSES",
     },
 ]
+
+export const sampleProducts = [
+    {
+        id: 1,
+        img: "https://images.pexels.com/photos/133472/pexels-photo-133472.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+        id: 2,
+        img: "https://images.pexels.com/photos/1231265/pexels-photo-1231265.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+        id: 3,
+        img: "https://images.pexels.com/photos/60520/rose-roses-flora-flower-60520.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+        id: 4,
+        img: "https://images.pexels.com/photos/704752/pexels-photo-704752.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+        id: 5,
+        img: "https://images.pexels.com/photos/236235/pexels-photo-236235.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+        id: 6,
+        img: "https://images.pexels.com/photos/2560682/pexels-photo-2560682.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+        id: 7,
+        img: "https://images.pexels.com/photos/1122629/pexels-photo-1122629.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+        id: 8,
+        img: "https://images.pexels.com/photos/1187080/pexels-photo-1187080.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+]
