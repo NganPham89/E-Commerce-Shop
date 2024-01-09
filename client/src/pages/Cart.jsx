@@ -5,10 +5,13 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Add from '@mui/icons-material/Add'
 import Remove from '@mui/icons-material/Remove'
+import { mobile } from '../responsive'
 
 const Container = styled.div``
 const Wrapper = styled.div`
     padding: 20px;
+    ${mobile({ padding: "10px" })};
+
 `
 const Top = styled.div`
     display: flex;
@@ -25,7 +28,10 @@ const TopButton = styled.button`
     background-color: ${props => props.type === "filled" ? "black" : "transparent"};
     color: ${props => props.type === "filled" && "white"};
 `
-const TopTexts = styled.div``
+const TopTexts = styled.div`
+    ${mobile({ display: "none" })};
+
+`
 const TopText = styled.span`
     text-decoration: underline;
     cursor: pointer;
@@ -34,6 +40,8 @@ const TopText = styled.span`
 const Bottom = styled.div`
     display: flex;
     justify-content: space-between;
+    ${mobile({flexDirection: "column"})};
+
 `
 const Info = styled.div`
     flex: 3;
@@ -46,13 +54,15 @@ const Summary = styled.div`
     height: 50vh;
 `
 
-const Title= styled.h1`
+const Title = styled.h1`
     font-weight: 300;
     text-align: center;
 `
 const Product = styled.div`
     display: flex;
     justify-content: space-between;
+    ${mobile({flexDirection: "column"})};
+
 `;
 const ProductDetail = styled.div`
     flex: 2;
@@ -85,10 +95,14 @@ const ProductAmountContainer = styled.div`
 const ProductAmount = styled.span`
     font-size: 24px;
     margin: 5px;
+    ${mobile({margin: "5px 20px"})};
+
 `
 const ProductPrice = styled.span`
     font-size: 30px;
     font-weight: 200;
+    ${mobile({marginBottom: "20px"})};
+
 `
 
 const Hr = styled.hr`
@@ -120,10 +134,10 @@ const Button = styled.button`
 
 
 const Cart = () => {
-  return (
-    <Container>
-        <Annoucement />
-        <Navbar />
+    return (
+        <Container>
+            <Annoucement />
+            <Navbar />
             <Wrapper>
                 <Title>Your Cart</Title>
                 <Top>
@@ -138,7 +152,7 @@ const Cart = () => {
                     <Info>
                         <Product>
                             <ProductDetail>
-                                <Image src="https://www.sensecuador.com/images/stories/virtuemart/product/ALTAMIRA9.jpg"/>
+                                <Image src="https://www.sensecuador.com/images/stories/virtuemart/product/ALTAMIRA9.jpg" />
                                 <Details>
                                     <ProductName><b>Product: </b>Royal Explorer Rose</ProductName>
                                     <ProductId><b>ID: </b>120320348023984</ProductId>
@@ -157,7 +171,7 @@ const Cart = () => {
                         <Hr />
                         <Product>
                             <ProductDetail>
-                                <Image src="https://www.sensecuador.com/images/stories/virtuemart/product/ALTAMIRA9.jpg"/>
+                                <Image src="https://www.sensecuador.com/images/stories/virtuemart/product/ALTAMIRA9.jpg" />
                                 <Details>
                                     <ProductName><b>Product: </b>Royal Explorer Rose</ProductName>
                                     <ProductId><b>ID: </b>120320348023984</ProductId>
@@ -186,7 +200,7 @@ const Cart = () => {
                         </SummaryItem>
                         <SummaryItem>
                             <SummaryItemText>Shipping Discount</SummaryItemText>
-                            <SummaryItemPrice>$-99.99</SummaryItemPrice>
+                            <SummaryItemPrice>- $99.99</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem type="total">
                             <SummaryItemText>Total</SummaryItemText>
@@ -196,9 +210,9 @@ const Cart = () => {
                     </Summary>
                 </Bottom>
             </Wrapper>
-        <Footer />
-    </Container>
-  )
+            <Footer />
+        </Container>
+    )
 }
 
 export default Cart

@@ -6,9 +6,12 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import RoomIcon from '@mui/icons-material/Room';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import EmailIcon from '@mui/icons-material/Email';
+import { mobile } from '../responsive';
 
 const Container = styled.div`
     display: flex;
+    ${mobile({flexDirection: "column"})};
+
 `
 const Left = styled.div`
     flex: 1;
@@ -19,6 +22,8 @@ const Left = styled.div`
 const Center = styled.div`
     flex: 1;
     padding: 20px;
+    ${mobile({display: "none"})};
+
 `
 const Right = styled.div`
     flex: 1;
