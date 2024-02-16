@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Navbar from '../components/Navbar'
 import Annoucement from '../components/Annoucement'
@@ -8,6 +8,9 @@ import Footer from '../components/Footer'
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import { mobile } from '../responsive'
+import { useLocation } from 'react-router-dom'
+// import axios from 'axios'
+import { publicRequest } from '../requestMethods'
 
 const Container = styled.div``
 const Wrapper = styled.div`
@@ -44,6 +47,10 @@ const Price = styled.span`
 `
 const FilterContainer = styled.div`
     margin: 30px 0px;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    ${mobile({width: "100%"})}
 `
 const Filter = styled.div`
     display: flex;
@@ -52,6 +59,14 @@ const Filter = styled.div`
 const FilterTitle = styled.span`
     font-size: 20px;
     font-weight: 200;
+`
+const FilterColor = styled.div`
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: ${(props) => props.color};
+    margin: 0px 5px;
+    cursor: pointer;
 `
 const FilterSize = styled.select`
     margin-left: 10px;
@@ -96,39 +111,78 @@ const Button = styled.button`
 `
 
 const ProductSingle = () => {
+
+    const location = useLocation();
+    const productId = location.pathname.split("/")[2];
+
+    const [product, setProduct] = useState({});
+    const [quantity, setQuantity] = useState(1);
+    const [size, setSize] = useState("");
+
+
+    useEffect(() => {
+        const getProduct = async () => {
+            try {
+                const res = await publicRequest.get(`/products/find/${productId}`)
+                setProduct(res.data)
+            } catch (err) {
+                console.log("GET PRODUCT ERROR", err)
+            }
+        }
+        getProduct();
+    }, [productId])
+
+    const handleQuantity = (type) => {
+        if (type === "decrease") {
+            quantity > 1 && setQuantity(quantity -1)
+        } else if (type === "increase") {
+            setQuantity(quantity + 1)
+        }
+    }
+
+    const handleClick = () => {
+        console.log("Add to cart clicked")
+    }
+
     return (
         <Container>
             <Annoucement />
             <Navbar />
             <Wrapper>
                 <ImageContainer>
-                    <Image src="https://images.pexels.com/photos/1252812/pexels-photo-1252812.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+                    <Image src={product.img} />
                 </ImageContainer>
                 <InfoContainer>
                     <Title>
-                        Tinto Rose
+                        {product.title}
                     </Title>
                     <Description>
-                        Each flower has a large, cup-shaped bloom, velvet petals, with a dark red hue makes for a sensual style.
+                       {product.description}
                     </Description>
-                    <Price>$39.99</Price>
+                    <Price>${product.price}</Price>
                     <FilterContainer>
                         <Filter>
+                            <FilterTitle>Color</FilterTitle>
+                            {product.color?.map((eachColor) => (
+                                <FilterColor color={eachColor} key={eachColor}/>
+                            ))}
+                        </Filter>
+                        <Filter>
                             <FilterTitle>Size</FilterTitle>
-                            <FilterSize>
-                                <FilterSizeOption>Small</FilterSizeOption>
-                                <FilterSizeOption>Medium</FilterSizeOption>
-                                <FilterSizeOption>Large</FilterSizeOption>
+                            <FilterSize onChange={(event)=> setSize(event.target.value)}>
+                                {product.size?.map((eachSize) => (
+                                    <FilterSizeOption key={eachSize}>{eachSize}</FilterSizeOption>
+                                ))}
                             </FilterSize>
                         </Filter>
                     </FilterContainer>
                     <QuantityContainer>
                         <AmountContainer>
-                            <RemoveIcon />
-                            <Amount>1</Amount>
-                            <AddIcon />
+                            <RemoveIcon onClick={() => handleQuantity("decrease")} />
+                            <Amount>{quantity}</Amount>
+                            <AddIcon onClick={() => handleQuantity("increase")} />
                         </AmountContainer>
-                        <Button>ADD TO CART</Button>
+                        <Button onClick={handleClick}>ADD TO CART</Button>
                     </QuantityContainer>
                 </InfoContainer>
             </Wrapper>
